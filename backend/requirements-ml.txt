@@ -1,0 +1,8 @@
+# Optional: abstractive + hybrid summarisation (downloads models on first use)
+-r requirements.txt
+transformers>=4.40
+torch>=2.2
+sentencepiece>=0.2
+protobuf>=4.25
+# Optional: better named-entity recognition
+# spacy>=3.7   (then: python -m spacy download en_core_web_sm)
