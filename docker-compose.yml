@@ -1,0 +1,19 @@
+# docker compose up --build            -> app on :8080, API on :8000, dashboard on :8501
+# docker compose build --build-arg WITH_ML=true backend   -> include transformer models support
+services:
+  backend:
+    build: { context: ./backend, args: { WITH_ML: "false" } }
+    ports: ["8000:8000"]
+    volumes: ["history:/data", "models:/models"]
+    environment:
+      CORS_ORIGINS: http://localhost:8080
+  frontend:
+    build: ./frontend
+    ports: ["8080:80"]
+    depends_on: [backend]
+  dashboard:
+    build: { context: ., dockerfile: Dockerfile.dashboard }
+    ports: ["8501:8501"]
+volumes:
+  history:
+  models:
